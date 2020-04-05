@@ -1,5 +1,3 @@
-Country,Male,Female,,,,,,,
-Mainland China,64%,36%,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
+Gender,Mainland China
+Male,64%
+Female,36%
