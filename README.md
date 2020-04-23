@@ -64,7 +64,7 @@ Sklearn's Latent Dirichlet Allocation for single words and bigrams. Not many big
 Tried a 2nd model - Non-Negative Matrix Factorization as it deemed to be fit for short documents such as tweets as opposed to LDA. Topics generated with NMF model appeared to be very similar to the one generated with LDA. Thus, stuck to LDA model as final model. 
 
 Outcome of topic modeling : 
-<img src = "Topics to words Sankey.PNG"/>
+<img src = "Topics to words Sankey.png"/>
 
 
 ---
