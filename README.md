@@ -66,56 +66,6 @@ Tried a 2nd model - Non-Negative Matrix Factorization as it deemed to be fit for
 Outcome of topic modeling : 
 <img src = "Topics to words Sankey.PNG"/>
 
-Tried 5 different models. For easier comparison the basic Logistic Regression model was considered as the baseline model.<br>
-The models tried and their respective Kaggle score follows:
-
-Model     | Kaggle Score
------     | ------------
-Logistic Regression | **0.50**
-Gradient Boost Classifier| **0.56**
-Gradient Boost Classifier with Grid Search | **0.49**
-Random Forest Classifier| **0.52**
-XGBoost Classifier| **0.53**
-Decision Trees| **0.52**
-
-**Model Evaluation**
-
-Baseline score : Logistic Regression
-
-Score on train set   | Score on test set
------     | ------------
-**0.74** | **0.78**
-
-Score of chosen model : Gradient Boost Classifier
-
-Score on train set   | Score on test set
------     | ------------
-**0.90** | **0.87**
-
-**Insights and conclusions**
-
-    1)  Least variance between test and training scores >> not overfit
-
-    2)  Feature importance suggests the prevalence of WN virus in certain locations, with specified species
-
-    3)  Time of the year with longer days influences virus presence
-
-    4)  Features highlighted to be used to determine where and when to focus on spraying efforts
-
-**Limitations and Recommendations**
-
-    Limitation: Model scored significantly lower on out of sample Kaggle set.
-
-**Recommendations:**
-
-    1)  Elaborate feature engineering with time series functions on weather dataset
-
-    2)  Include dummy variable for top traps
-
-    3)  NumMosquito feature even with its high correlation to virus presence had to ignored >> predict this feature first before predicting presence of virus
-
-    4)  Availability of spray information for more years would help the model score better
-
 
 ---
 ### Data Sources
