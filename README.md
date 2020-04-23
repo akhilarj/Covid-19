@@ -18,63 +18,53 @@ This case study covers the following aspects of the pandemic:
        
 The above scope is achieved through the below 3-step process: 
 
-        1. EDA & VISUALIZATION covering the following: 
+        1. EDA & VISUALIZATION - Housing various data sources under a single visualization roof covering the following: 
             a. Global Health Indicators - a look at the trend of daily case numbers and countries affected the most
             b. Demographic Indicators - a look into cases by age range for highly affected countries
             c. Government Response Indicators - association analysis of stringency measures implemented vs. increasing case numbers
             d. Economic Indicators - exploring the trend of daily closing prices for key global stock indices
-            
+            https://public.tableau.com/profile/akhila.joseph#!/vizhome/CovidDashboard2_15860650422580/Globalhealthindicators?publish=yes
         2. MONITOR SOCIAL INTERACTIONS - gain an understanding of the social media interactions from twitter regarding Covid-19 through topic modeling of tweets. 
-        3. FORECAST - absolute number of confirmed and fatal cases worldwide for the upcoming week using timeseries recurring neural-net model - LSTM 
-
-
+        3. FORECAST - absolute number of confirmed and fatal cases worldwide for the upcoming week using timeseries recurring neural-net model - LSTM
 
 
 ---
 
+## Insights from EDA
 
-## Project team organization and planning
-
-The project is executed as a group and Github repository was used to share notebooks among team members.<br>
-Project planning was implemented through google sheet by defining deliverables, timelines, team member responsible and progress tracking.<br>
-
----
-
-## Data Cleaning & EDA
-
-**Data Cleaning**
-
-    1) Appropriate data types assigned to features e.g date
-    2) Dropped redundant features such e.g. location related features & duplicate rows
-    3) Dropped features with huge instances of missing values
-    4) Imputed values to features indicated with M (Missing) & T(Trace)
-    5) Aligned training set with testing set for training and modeling later on
-
-**EDA**
-
-    1) Data availability:
-        a. Train data: 2007, 2009, 2011 and 2013
-        b. Test data: 2008, 2010, 2012 and 2014
-        c. Spray data: 2011 and 2013
-        d. Weather data: 2007 - 2014
-
-    2) Significant increase in number of spray locations in 2013 vs. 2011
-
-    3) Looking at traps with WNV presence vs. sprays, clusters can be identified where sprayed. For some reason, central area did not have any spray locations
-
-    4) Out of total 7 species of mosquitoes only 3 species are seen to be carriers of WNV virus
-
-    5) 2009 and 2011 are the years where overall WNV count was lower. Need to dig deeper into the reason why. Probably weather conditions were not favorable for the mosquitoes in these years.
-
-    6) Only 8 out of 134 traps have > 10 WNV positive
-
-    7) After identifying top traps and trying to plot sprays over these traps explained the spraying locations much better.
+        1. The number of confirmed and fatal cases are increasing exponentially Mar 2020. 
+        2. The US remains as the top affected country worldwide with ~ 840k confirmed cases to date followed by Spain and Italy who are far behind (~200k) the US in terms of absolute numbers
+        3. The US reamins as the top country for fatalities as well wiht over 400k fatal cases. 
+        4. Within the US, Newyork is the most affected state followed by New Jersey both supassing Hubei province in China where the virus originated. 
+        5. The trend remains the same for fatalities with Newyork and New Jersey in the lead followed by Hubei province. 
+        6. Mortality rate has now reached close to 7% worldwide. 
+        7. Based on the demographic data obtained from Italy, Spain, South Korea and China, 80-90 year olds are the most affected demographic group facing fatal cases, out of which 64% are male patients.  
+        8. Looking at association analysis between stringency index (a derivative of stringency measures taken by governments in response to covid-19 situation), most of the countries with exponential growth has managed to curb the growth and stabilize the number of newly confirmed cases with higher stringency measures. United States is an exception in this case. The country raised its overall stringency index only to 76 thus far and the confirmed cases have been growing. This does suggest a direct corelation between stringency measures and the growth of new cases in the countries. 
+        9. Looking at the economic landscape, trading volumes started to increase in Feb/Mar period across all major stock indices resulting in a downward trend of closing prices indicating there are several sell off transactions globally. 
+        
 
 ---
 
 ## Modeling, Evaluation and conclusions
 
-**Modeling**
+### Topic modeling of tweets 
+
+Close to 54,000 tweets where scraped from twitter with hastags - COVID, COVID19, covid, coronavirus, coronavirusimpact, coronavirusoutbreak, corona. 
+Tried Sklearn's Latent Dirichlet Allocation on ~54,000 tweets scraped from twitter. Preliminary EDA was performed on these tweets.
+
+        1. Identified top mentions as well as top hastags (excluding the ones that were used for scraping). 
+                - Popular hashtags included #CoronavirusUSA, #CoronaLockdown, #Coronavirustruth, #Stayhome, #China, #trump, #wuhan and more. 
+                - Popular mentioned included @realdonaldtrump, @YouTube, @POTUS (Presdent of The US), @WHO, @UKChange, @CNN, @CDCgov and more.
+        2. Most number of tweets were seen to be generated on Thursday, Wednesday and Saturdays of the week. 
+        
+Preliminary cleaning & text processing of the tweets was performed prior to passing it to the model. 
+
+Modeling: 
+Sklearn's Latent Dirichlet Allocation for single words and bigrams. Not many bigrams were identified. Thus, chose to stick with single words. 
+Tried a 2nd model - Non-Negative Matrix Factorization as it deemed to be fit for short documents such as tweets as opposed to LDA. Topics generated with NMF model appeared to be very similar to the one generated with LDA. Thus, stuck to LDA model as final model. 
+
+Outcome of topic modeling : 
+<img src = "Topics to words Sankey.PNG"/>
 
 Tried 5 different models. For easier comparison the basic Logistic Regression model was considered as the baseline model.<br>
 The models tried and their respective Kaggle score follows:
@@ -128,25 +118,4 @@ Score on train set   | Score on test set
 
 
 ---
-## Cost Benefit Analysis, Conclusions & Recommendations
-
-**Human Benefits of spraying outweighs the Costs!<br>**
-The table below explains further:
-
- Cost and Benefit | Spray | Not Spray
------      |-----     | ------------
-Misc. Costs |Labour work : Approx. $0.75 per acre of spray | Medical cost<br> $33,143 per inpatient<br>$6,317 per outpatient<br> $18,097 per patient spent time in a nursing home<br> Productivity loss<br>$58,935 per personal income
-Vector Control Cost | ~ $144K per person |
-Benefits |   Human life saved<br> - Improved quality of life<br> - Workplace productivity<br> - Economic benefits from tourism  |Human life loss <br> - Long term / wider mental health issues<br> - Lower workplace productivity <br> - Negative economic impact
-
-**Recommendations**
-
-    1)  Consider strategically spraying at locations with highest infections.
-
-    2)  Conduct spraying during hotter months i.e. August and September
-
-    3)  Educate and promote the public to:
-        a)  Use insect repellent
-        b)  Wear long-sleeved shirts and pants
-        c)  Take steps to control mosquitoes indoors and outdoors
-            i.e. Remove standing water where mosquitoes could lay eggs
+### Data Sources
