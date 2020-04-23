@@ -90,9 +90,9 @@ Metrics used included MAPE (Mean Absolute Percentage Error and RMSLE)
 
 ### Data Sources
 
-Base dataset: John Hopkins Centre of System Science and Engineering (Covid- case numbers and training data)
-Demographic data for selected countries : The Lancet Digital Health
-Economic Indicators : Yahoo Finance
-Worldwide Government Responses: Oxford University Govt. Response Tracker
-Tweets: Scraped using twitter scraper API
+Base dataset: John Hopkins Centre of System Science and Engineering (Covid- case numbers and training data)<br>
+Demographic data for selected countries : The Lancet Digital Health<br>
+Economic Indicators : Yahoo Finance<br>
+Worldwide Government Responses: Oxford University Govt. Response Tracker<br>
+Tweets: Scraped using twitter scraper API<br>
 
