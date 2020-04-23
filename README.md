@@ -60,12 +60,39 @@ Tried Sklearn's Latent Dirichlet Allocation on ~54,000 tweets scraped from twitt
 Preliminary cleaning & text processing of the tweets was performed prior to passing it to the model. 
 
 Modeling: 
-Sklearn's Latent Dirichlet Allocation for single words and bigrams. Not many bigrams were identified. Thus, chose to stick with single words. 
+**Sklearn's Latent Dirichlet Allocation** for single words and bigrams. Not many bigrams were identified. Thus, chose to stick with single words. 
 Tried a 2nd model - Non-Negative Matrix Factorization as it deemed to be fit for short documents such as tweets as opposed to LDA. Topics generated with NMF model appeared to be very similar to the one generated with LDA. Thus, stuck to LDA model as final model. 
 
-Outcome of topic modeling : 
+Outcome of topic modeling follows. Topics interpreted from the top words are available on the left of this sankey diagram and top words identified comes on the right of the diagram. 
+
 <img src = "Topics to words Sankey.png"/>
 
-
 ---
+
+### Forecasting of Confirmed and Fatal Cases
+
+Employed timeseries recurring neural net model **LSTM** to forecast as date was the only feature to be used in the model. 
+
+Modeling involved the following steps: 
+1) Split the whole dataset into training (90%) and validation (10%) sets.
+2) Scaled confirmed and fatal case numbers with MinMax Scaler to normalize the numbers.
+3) Generated batches of temporal data using TimeseriesGenerator with 5 steps i.e 5 data points to predict the 6th data point.
+4) Instantiated a Sequential model with 150 neurons passed to LSTM layer, shrink the output to 75 neurons that is fed to a dense layer and another dense layer that further shrinks the final output to 2 (confirmed & fatal case). 
+5) Activation function used is relu, optimizer used is Adam and loss function is MSE. 
+
+#### Model Performance
+
+Metrics used included MAPE (Mean Absolute Percentage Error and RMSLE)
+        
+        - MAPE scored at 9% for the validation set translating to 91% accuracy.
+        - RMSLE score 0.1
+        - Checked the actual accuracy for dates that were not available in the validation set (latest 4 days from 19-Apr to 22 -Apr) and accuracy scored at 95% and 94% for confirmed and fatal cases respectively. 
+
 ### Data Sources
+
+Base dataset: John Hopkins Centre of System Science and Engineering (Covid- case numbers and training data)
+Demographic data for selected countries : The Lancet Digital Health
+Economic Indicators : Yahoo Finance
+Worldwide Government Responses: Oxford University Govt. Response Tracker
+Tweets: Scraped using twitter scraper API
+
